@@ -1,0 +1,40 @@
+{
+    "name": "revolution/laravel-slim",
+    "description": "Set up a Laravel project to console only.",
+    "keywords": [
+        "laravel",
+        "artisan",
+        "console"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Revolution\\Slim\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kawax",
+            "email": "kawaxbiz@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Revolution\\Slim\\SlimServiceProvider"
+            ]
+        }
+    }
+}
