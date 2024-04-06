@@ -37,22 +37,26 @@ class SlimConsoleCommand extends Command
             return 1;
         }
 
-        File::deleteDirectory(app_path('Http'));
-        File::deleteDirectory(app_path('Models'));
-        File::deleteDirectory(base_path('database'));
-        File::deleteDirectory(public_path());
-        File::deleteDirectory(resource_path());
-        File::deleteDirectory(base_path('node_modules'));
+        collect([
+            // directory
+            app_path('Http'),
+            app_path('Models'),
+            base_path('database'),
+            public_path(),
+            resource_path(),
+            base_path('node_modules'),
 
-        File::delete(config_path('auth.php'));
-        File::delete(config_path('database.php'));
-        File::delete(config_path('mail.php'));
-        File::delete(config_path('queue.php'));
-        File::delete(config_path('session.php'));
-
-        File::delete(base_path('routes/web.php'));
-        File::delete(base_path('package.json'));
-        File::delete(base_path('vite.config.js'));
+            // file
+            config_path('auth.php'),
+            config_path('database.php'),
+            config_path('mail.php'),
+            config_path('queue.php'),
+            config_path('queue.php'),
+            config_path('session.php'),
+            base_path('routes/web.php'),
+            base_path('package.json'),
+            base_path('vite.config.js'),
+        ])->each(fn (string $path) => $this->delete($path));
 
         $this->replaceBootstrap();
         $this->replaceExampleTest();
@@ -95,8 +99,21 @@ class SlimConsoleCommand extends Command
         return true;
     }
 
+    protected function delete(string $path): void
+    {
+        $this->line('<fg=gray>Delete</> '.Str::remove(base_path().'/', $path));
+
+        if (File::isDirectory($path)) {
+            File::deleteDirectory($path);
+        } else {
+            File::delete($path);
+        }
+    }
+
     protected function replaceBootstrap(): void
     {
+        $this->line('<fg=gray>Replace</> bootstrap/app.php');
+
         File::replaceInFile(
             search: [
                 'use Illuminate\Foundation\Configuration\Middleware;'.PHP_EOL,
@@ -113,6 +130,8 @@ class SlimConsoleCommand extends Command
 
     protected function replaceExampleTest(): void
     {
+        $this->line('<fg=gray>Replace</> tests/Feature/ExampleTest.php');
+
         File::replaceInFile(
             search: [
                 "get('/')",
