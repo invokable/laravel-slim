@@ -6,7 +6,7 @@ Set up a Laravel project to console only.
 - PHP >= 8.2
 - Laravel >= 11.0
 
-Only new projects with Laravel 11 or later.(No starter kit)
+Only new projects with Laravel 11 or later.(No starter kit, No API)
 
 ## Installation
 
