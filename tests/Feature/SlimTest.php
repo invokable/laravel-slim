@@ -37,7 +37,7 @@ class SlimTest extends TestCase
     {
         $this->artisan('slim:console')
             ->assertSuccessful()
-            ->expectsOutput('Delete routes/web.php')
+            ->expectsOutput('Deleted routes/web.php')
             ->expectsOutput('Set up successfully.');
 
         $this->assertFileDoesNotExist(public_path());
