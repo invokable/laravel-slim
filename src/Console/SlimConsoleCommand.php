@@ -67,7 +67,7 @@ class SlimConsoleCommand extends Command
 
     protected function check(): bool
     {
-        if (File::missing(app()->bootstrapPath('providers.php'))) {
+        if (File::missing(app()->getBootstrapProvidersPath())) {
             return false;
         }
 
