@@ -14,11 +14,6 @@
     "require-dev": {
         "orchestra/testbench": "^9.0"
     },
-    "conflict": {
-        "laravel/breeze": "*",
-        "laravel/jetstream": "*",
-        "laravel/ui": "*"
-    },
     "autoload": {
         "psr-4": {
             "Revolution\\Slim\\": "src"
