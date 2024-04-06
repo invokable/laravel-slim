@@ -14,6 +14,11 @@ Only new projects with Laravel 11 or later.(No starter kit)
 composer require revolution/laravel-slim --dev
 ```
 
+### Uninstall
+```shell
+composer remove revolution/laravel-slim --dev
+```
+
 ## Usage
 Be sure to run this command only on new projects. A lot of files are deleted.
 
