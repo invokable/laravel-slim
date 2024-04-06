@@ -21,17 +21,6 @@ class SlimTest extends TestCase
         File::copyDirectory(__DIR__.'/../skeleton/laravel11', $path);
     }
 
-    public function test_slim_console()
-    {
-        $this->artisan('slim:console')
-            ->assertSuccessful()
-            ->expectsOutput('Set up successfully.');
-
-        $this->assertFileDoesNotExist(public_path());
-        $this->assertFileDoesNotExist(resource_path());
-        $this->assertFileDoesNotExist(base_path('routes/web.php'));
-    }
-
     public function test_slim_console_failed()
     {
         File::delete(base_path('routes/web.php'));
@@ -42,5 +31,17 @@ class SlimTest extends TestCase
 
         $this->assertFileExists(public_path());
         $this->assertFileExists(resource_path());
+    }
+
+    public function test_slim_console()
+    {
+        $this->artisan('slim:console')
+            ->assertSuccessful()
+            ->expectsOutput('Delete routes/web.php')
+            ->expectsOutput('Set up successfully.');
+
+        $this->assertFileDoesNotExist(public_path());
+        $this->assertFileDoesNotExist(resource_path());
+        $this->assertFileDoesNotExist(base_path('routes/web.php'));
     }
 }
