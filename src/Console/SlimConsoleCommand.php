@@ -47,14 +47,21 @@ class SlimConsoleCommand extends Command
             base_path('node_modules'),
 
             // file
-            config_path('auth.php'),
-            config_path('database.php'),
-            config_path('mail.php'),
-            config_path('queue.php'),
-            config_path('session.php'),
             base_path('routes/web.php'),
             base_path('package.json'),
+            base_path('package-lock.json'),
             base_path('vite.config.js'),
+
+            // config
+            config_path('auth.php'),
+            config_path('cache.php'),
+            config_path('database.php'),
+            config_path('filesystems.php'),
+            config_path('logging.php'),
+            config_path('mail.php'),
+            config_path('queue.php'),
+            config_path('services.php'),
+            config_path('session.php'),
         ])->each(fn (string $path) => $this->delete($path));
 
         $this->replaceBootstrap();
@@ -133,13 +140,13 @@ class SlimConsoleCommand extends Command
             return;
         }
 
-        $this->line('<fg=gray>Deleted</> '.Str::remove(base_path().'/', $path));
-
         if (File::isDirectory($path)) {
             File::deleteDirectory($path);
         } else {
             File::delete($path);
         }
+
+        $this->line('<fg=gray>Deleted</> '.Str::remove(base_path().'/', $path));
     }
 
     protected function replaceBootstrap(): void
