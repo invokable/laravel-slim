@@ -67,7 +67,7 @@ class SlimConsoleCommand extends Command
 
     protected function check(): bool
     {
-        if (! File::exists(base_path('bootstrap/providers.php'))) {
+        if (File::missing(base_path('bootstrap/providers.php'))) {
             return false;
         }
 
@@ -79,19 +79,19 @@ class SlimConsoleCommand extends Command
             return false;
         }
 
-        if (! File::exists(base_path('routes/web.php'))) {
+        if (File::missing(base_path('routes/web.php'))) {
             return false;
         }
 
-        if (! File::exists(base_path('database'))) {
+        if (File::missing(base_path('database'))) {
             return false;
         }
 
-        if (! File::exists(public_path())) {
+        if (File::missing(public_path())) {
             return false;
         }
 
-        if (! File::exists(resource_path())) {
+        if (File::missing(resource_path())) {
             return false;
         }
 
@@ -100,6 +100,10 @@ class SlimConsoleCommand extends Command
 
     protected function delete(string $path): void
     {
+        if (File::missing($path)) {
+            return;
+        }
+
         $this->line('<fg=gray>Deleted</> '.Str::remove(base_path().'/', $path));
 
         if (File::isDirectory($path)) {
