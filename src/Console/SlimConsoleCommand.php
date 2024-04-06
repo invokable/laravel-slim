@@ -41,7 +41,7 @@ class SlimConsoleCommand extends Command
             // directory
             app_path('Http'),
             app_path('Models'),
-            base_path('database'),
+            app()->databasePath(),
             public_path(),
             resource_path(),
             base_path('node_modules'),
@@ -67,11 +67,26 @@ class SlimConsoleCommand extends Command
 
     protected function check(): bool
     {
-        if (File::missing(base_path('bootstrap/providers.php'))) {
+        if (File::missing(app()->bootstrapPath('providers.php'))) {
             return false;
         }
 
-        if (! Str::contains(File::get(base_path('bootstrap/app.php')), 'return Application::configure')) {
+        if (! Str::contains($bootstrap = File::get(app()->bootstrapPath('app.php')), 'return Application::configure')) {
+            return false;
+        }
+
+        // install:api
+        if (Str::contains($bootstrap, '/routes/api.php')) {
+            return false;
+        }
+
+        // breeze api sanctum
+        if (Str::contains($bootstrap, 'EnsureFrontendRequestsAreStateful::class')) {
+            return false;
+        }
+
+        // breeze inertia
+        if (Str::contains($bootstrap, 'HandleInertiaRequests::class')) {
             return false;
         }
 
@@ -83,7 +98,21 @@ class SlimConsoleCommand extends Command
             return false;
         }
 
-        if (File::missing(base_path('database'))) {
+        if (File::exists(base_path('routes/api.php'))) {
+            return false;
+        }
+
+        // install:broadcasting
+        if (File::exists(base_path('routes/channels.php'))) {
+            return false;
+        }
+
+        // jetstream
+        if (File::exists(config_path('jetstream.php'))) {
+            return false;
+        }
+
+        if (File::missing(app()->databasePath())) {
             return false;
         }
 
@@ -127,7 +156,7 @@ class SlimConsoleCommand extends Command
     })'.PHP_EOL,
             ],
             replace: '',
-            path: base_path('bootstrap/app.php')
+            path: app()->bootstrapPath('app.php')
         );
     }
 
