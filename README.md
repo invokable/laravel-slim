@@ -35,5 +35,11 @@ You can use the usual artisan commands.
 php artisan make:command Test
 ```
 
+## Re-add config file
+
+```shell
+php artisan config:publish services
+```
+
 ## LICENSE
 MIT  
