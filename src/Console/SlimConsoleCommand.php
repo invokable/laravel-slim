@@ -51,7 +51,6 @@ class SlimConsoleCommand extends Command
             config_path('database.php'),
             config_path('mail.php'),
             config_path('queue.php'),
-            config_path('queue.php'),
             config_path('session.php'),
             base_path('routes/web.php'),
             base_path('package.json'),
@@ -101,7 +100,7 @@ class SlimConsoleCommand extends Command
 
     protected function delete(string $path): void
     {
-        $this->line('<fg=gray>Delete</> '.Str::remove(base_path().'/', $path));
+        $this->line('<fg=gray>Deleted</> '.Str::remove(base_path().'/', $path));
 
         if (File::isDirectory($path)) {
             File::deleteDirectory($path);
