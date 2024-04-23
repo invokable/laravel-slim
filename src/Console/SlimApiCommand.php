@@ -101,6 +101,7 @@ class SlimApiCommand extends Command
 
         if (File::exists(base_path('tests/Pest.php'))) {
             $this->warn('SKIP : Using Pest');
+
             return;
         }
 
