@@ -1,6 +1,6 @@
 # Slim
 
-Set up a Laravel project to console only.
+Set up a Laravel project to console/api only.
 
 ## Requirements
 - PHP >= 8.2
@@ -20,6 +20,8 @@ composer remove revolution/laravel-slim --dev
 ```
 
 ## Usage
+
+### Console project
 Be sure to run this command only on new projects. A lot of files are deleted.
 
 ```shell
@@ -28,17 +30,24 @@ php artisan slim:console
 
 Which files will be deleted? See SlimConsoleCommand.php
 
-## After set up
+#### After set up
 You can use the usual artisan commands.
 
 ```shell
 php artisan make:command Test
 ```
 
-## Re-add config file
+#### Re-add config file
 
 ```shell
 php artisan config:publish services
+```
+
+### API project
+Be sure to run this command only on new projects.
+
+```shell
+php artisan slim:api
 ```
 
 ## LICENSE

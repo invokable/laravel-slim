@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 use Revolution\Slim\Console\Concerns\WithCheck;
 use Revolution\Slim\Console\Concerns\WithDelete;
 
-class SlimConsoleCommand extends Command
+class SlimApiCommand extends Command
 {
     use WithCheck;
     use WithDelete;
@@ -19,14 +19,14 @@ class SlimConsoleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'slim:console';
+    protected $signature = 'slim:api';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Set up for console only project';
+    protected $description = 'Set up for api only project';
 
     /**
      * Execute the console command.
@@ -41,12 +41,10 @@ class SlimConsoleCommand extends Command
             return 1;
         }
 
+        $this->call('install:api', ['--without-migration-prompt' => true]);
+
         collect([
             // directory
-            app_path('Http'),
-            app_path('Models'),
-            app()->databasePath(),
-            public_path(),
             resource_path(),
             base_path('node_modules'),
 
@@ -55,17 +53,6 @@ class SlimConsoleCommand extends Command
             base_path('package.json'),
             base_path('package-lock.json'),
             base_path('vite.config.js'),
-
-            // config
-            config_path('auth.php'),
-            config_path('cache.php'),
-            config_path('database.php'),
-            config_path('filesystems.php'),
-            config_path('logging.php'),
-            config_path('mail.php'),
-            config_path('queue.php'),
-            config_path('services.php'),
-            config_path('session.php'),
         ])->each(fn (string $path) => $this->delete($path));
 
         $this->replaceBootstrap();
@@ -82,12 +69,7 @@ class SlimConsoleCommand extends Command
 
         File::replaceInFile(
             search: [
-                'use Illuminate\Foundation\Configuration\Middleware;'.PHP_EOL,
                 "        web: __DIR__.'/../routes/web.php',".PHP_EOL,
-                "        health: '/up',".PHP_EOL,
-                '    ->withMiddleware(function (Middleware $middleware) {
-        //
-    })'.PHP_EOL,
             ],
             replace: '',
             path: app()->bootstrapPath('app.php'),
@@ -98,16 +80,9 @@ class SlimConsoleCommand extends Command
     {
         $this->line('<fg=gray>Replace</> tests/Feature/ExampleTest.php');
 
-        File::replaceInFile(
-            search: [
-                "get('/')",
-                'assertStatus(200)',
-            ],
-            replace: [
-                "artisan('inspire')",
-                'assertOk()',
-            ],
+        File::replace(
             path: base_path('tests/Feature/ExampleTest.php'),
+            content: File::get(__DIR__.'/stubs/api/ExampleTest.php'),
         );
     }
 }

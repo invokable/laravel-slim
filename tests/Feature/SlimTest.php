@@ -33,7 +33,7 @@ class SlimTest extends TestCase
         $this->assertFileExists(resource_path());
     }
 
-    public function test_slim_console()
+    public function test_slim_console_successful()
     {
         $this->artisan('slim:console')
             ->assertSuccessful()
@@ -42,6 +42,29 @@ class SlimTest extends TestCase
 
         $this->assertFileDoesNotExist(public_path());
         $this->assertFileDoesNotExist(resource_path());
+        $this->assertFileDoesNotExist(base_path('routes/web.php'));
+    }
+
+    public function test_slim_api_failed()
+    {
+        File::delete(base_path('routes/web.php'));
+
+        $this->artisan('slim:api')
+            ->assertFailed()
+            ->expectsOutput('Must run on new project');
+
+        $this->assertFileExists(public_path());
+        $this->assertFileExists(resource_path());
+    }
+
+    public function test_slim_api_successful()
+    {
+        $this->artisan('slim:api')
+            ->assertSuccessful()
+            ->expectsOutput('Deleted routes/web.php')
+            ->expectsOutput('Set up successfully.');
+
+        $this->assertFileExists(base_path('routes/api.php'));
         $this->assertFileDoesNotExist(base_path('routes/web.php'));
     }
 }

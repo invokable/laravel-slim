@@ -1,6 +1,6 @@
 {
     "name": "revolution/laravel-slim",
-    "description": "Set up a Laravel project to console only.",
+    "description": "Set up a Laravel project to console/api only.",
     "keywords": [
         "laravel",
         "artisan",

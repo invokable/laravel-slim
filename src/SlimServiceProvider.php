@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Revolution\Slim;
 
 use Illuminate\Support\ServiceProvider;
+use Revolution\Slim\Console\SlimApiCommand;
 use Revolution\Slim\Console\SlimConsoleCommand;
 
 class SlimServiceProvider extends ServiceProvider
@@ -14,6 +15,7 @@ class SlimServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 SlimConsoleCommand::class,
+                SlimApiCommand::class,
             ]);
         }
     }
