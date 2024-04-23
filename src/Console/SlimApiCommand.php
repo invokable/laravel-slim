@@ -42,6 +42,7 @@ class SlimApiCommand extends Command
         }
 
         $this->call('install:api', ['--without-migration-prompt' => true]);
+        $this->call('migrate');
 
         collect([
             // directory
@@ -55,12 +56,30 @@ class SlimApiCommand extends Command
             base_path('vite.config.js'),
         ])->each(fn (string $path) => $this->delete($path));
 
+        $this->replaceUser();
         $this->replaceBootstrap();
         $this->replaceExampleTest();
 
         $this->info('Set up successfully.');
 
         return 0;
+    }
+
+    protected function replaceUser(): void
+    {
+        $this->line('<fg=gray>Replace</> app/Models/User.php');
+
+        File::replaceInFile(
+            search: [
+                'use Illuminate\Notifications\Notifiable;'.PHP_EOL,
+                'use HasFactory, Notifiable;'.PHP_EOL,
+            ],
+            replace: [
+                'use Illuminate\Notifications\Notifiable;'.PHP_EOL.'use Laravel\Sanctum\HasApiTokens;'.PHP_EOL,
+                'use HasApiTokens, HasFactory, Notifiable;'.PHP_EOL,
+            ],
+            path: app()->path('Models/User.php'),
+        );
     }
 
     protected function replaceBootstrap(): void
@@ -79,6 +98,11 @@ class SlimApiCommand extends Command
     protected function replaceExampleTest(): void
     {
         $this->line('<fg=gray>Replace</> tests/Feature/ExampleTest.php');
+
+        if (File::exists(base_path('tests/Pest.php'))) {
+            $this->warn('SKIP : Using Pest');
+            return;
+        }
 
         File::replace(
             path: base_path('tests/Feature/ExampleTest.php'),
