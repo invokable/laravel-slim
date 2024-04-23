@@ -43,7 +43,7 @@ php artisan make:command Test
 php artisan config:publish services
 ```
 
-### API project
+### API project (Sanctum)
 Be sure to run this command only on new projects.
 
 ```shell
