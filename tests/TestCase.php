@@ -6,7 +6,7 @@ namespace Tests;
 
 use Revolution\Slim\SlimServiceProvider;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
      * Load package service provider.
