@@ -11,7 +11,6 @@ use Illuminate\Validation\Rules;
 /**
  * This is a sample authentication for the stateless API. Feel free to modify it.
  */
-
 Route::post('register', function (Request $request) {
     $request->validate([
         'name' => ['required', 'string', 'max:255'],
