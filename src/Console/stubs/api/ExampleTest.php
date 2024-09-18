@@ -17,11 +17,15 @@ class ExampleTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get('api/user');
+        $token = $user->createToken('test')->plainTextToken;
+
+        $response = $this->actingAs($user)->withToken($token)->get('api/user');
 
         $response->assertStatus(200)
             ->assertJson([
                 'name' => $user->name,
             ]);
+
+        $this->assertStringStartsWith('1|', $token);
     }
 }
