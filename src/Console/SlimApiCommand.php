@@ -114,7 +114,11 @@ class SlimApiCommand extends Command
 
     protected function auth(): void
     {
+        $this->line('<fg=gray>Replace</> routes/auth.php');
+
         File::copy(__DIR__.'/stubs/api/auth.php', base_path('routes/auth.php'));
+
+        $this->line('<fg=gray>Replace</> routes/api.php');
 
         File::append(
             path: base_path('routes/api.php'),
