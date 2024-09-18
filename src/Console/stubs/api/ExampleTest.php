@@ -19,7 +19,7 @@ class ExampleTest extends TestCase
 
         $token = $user->createToken('test')->plainTextToken;
 
-        $response = $this->actingAs($user)->withToken($token)->get('api/user');
+        $response = $this->actingAs($user)->withToken($token)->getJson('api/user');
 
         $response->assertStatus(200)
             ->assertJson([
