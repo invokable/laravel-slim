@@ -59,6 +59,7 @@ class SlimApiCommand extends Command
         $this->replaceUser();
         $this->replaceBootstrap();
         $this->replaceExampleTest();
+        $this->auth();
 
         $this->info('Set up successfully.');
 
@@ -108,6 +109,16 @@ class SlimApiCommand extends Command
         File::replace(
             path: base_path('tests/Feature/ExampleTest.php'),
             content: File::get(__DIR__.'/stubs/api/ExampleTest.php'),
+        );
+    }
+
+    protected function auth(): void
+    {
+        File::copy(__DIR__.'/stubs/api/auth.php', base_path('routes/auth.php'));
+
+        File::append(
+            path: base_path('routes/api.php'),
+            data: PHP_EOL."require __DIR__.'/auth.php';".PHP_EOL,
         );
     }
 }

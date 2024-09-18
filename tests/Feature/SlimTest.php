@@ -65,6 +65,7 @@ class SlimTest extends TestCase
             ->expectsOutput('Set up successfully.');
 
         $this->assertFileExists(base_path('routes/api.php'));
+        $this->assertFileExists(base_path('routes/auth.php'));
         $this->assertFileDoesNotExist(base_path('routes/web.php'));
     }
 }

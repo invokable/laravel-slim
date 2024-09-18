@@ -2,6 +2,9 @@
 
 Set up a Laravel project to console/api only.
 
+- Console only
+- Stateless API only
+
 ## Requirements
 - PHP >= 8.2
 - Laravel >= 11.0
@@ -43,7 +46,7 @@ php artisan make:command Test
 php artisan config:publish services
 ```
 
-### API project (Sanctum)
+### Stateless API project (Sanctum API Token Authentication)
 Be sure to run this command only on new projects.
 
 ```shell
