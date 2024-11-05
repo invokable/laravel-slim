@@ -54,6 +54,8 @@ class SlimApiCommand extends Command
             base_path('package.json'),
             base_path('package-lock.json'),
             base_path('vite.config.js'),
+            base_path('postcss.config.js'),
+            base_path('tailwind.config.js'),
         ])->each(fn (string $path) => $this->delete($path));
 
         $this->replaceUser();
