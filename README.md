@@ -7,9 +7,9 @@ Set up a Laravel project to console/api only.
 
 ## Requirements
 - PHP >= 8.2
-- Laravel >= 11.0
+- Laravel >= 12.0
 
-Only new projects with Laravel 11 or later.(No starter kit, No API)
+Only new projects with Laravel 12 or later.(No starter kit, No API)
 
 ## Installation
 
@@ -21,6 +21,8 @@ composer require revolution/laravel-slim --dev
 ```shell
 composer remove revolution/laravel-slim --dev
 ```
+
+Once you have run the command you can uninstall this package.
 
 ## Usage
 

@@ -18,7 +18,7 @@ class SlimTest extends TestCase
         $this->app->setBasePath($path);
 
         File::deleteDirectory($path);
-        File::copyDirectory(__DIR__.'/../skeleton/laravel11', $path);
+        File::copyDirectory(__DIR__.'/../skeleton/laravel12', $path);
     }
 
     public function test_slim_console_failed()
