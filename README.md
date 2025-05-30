@@ -5,6 +5,8 @@ Set up a Laravel project to console/api only.
 - Console only
 - Stateless API only
 
+> **Note:** [laravel-console-starter](https://github.com/invokable/laravel-console-starter) is a starter kit that has this package applied.
+
 ## Requirements
 - PHP >= 8.2
 - Laravel >= 12.0
