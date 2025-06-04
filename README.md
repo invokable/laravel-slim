@@ -1,4 +1,4 @@
-# Slim
+# Slim skeleton
 
 Set up a Laravel project to console/api only.
 
