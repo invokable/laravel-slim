@@ -1,4 +1,4 @@
-# Slim skeleton
+# Slim Skeleton
 
 Set up a Laravel project to console/api only.
 
@@ -11,7 +11,7 @@ Set up a Laravel project to console/api only.
 - PHP >= 8.2
 - Laravel >= 12.0
 
-Only new projects with Laravel 12 or later.(No starter kit, No API)
+Only new projects with Laravel 12.(No starter kit, No API)
 
 ## Installation
 
