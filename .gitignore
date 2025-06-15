@@ -1,3 +1,5 @@
 vendor
 composer.lock
 /tests/skeleton/laravel_test
+build/
+.phpunit.result.cache
