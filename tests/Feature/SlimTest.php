@@ -18,7 +18,7 @@ class SlimTest extends TestCase
         $this->app->setBasePath($path);
 
         File::deleteDirectory($path);
-        File::copyDirectory(__DIR__.'/../skeleton/laravel12', $path);
+        File::copyDirectory(__DIR__.'/../skeleton/laravel13', $path);
     }
 
     public function test_slim_console_failed()
@@ -43,8 +43,8 @@ class SlimTest extends TestCase
         $this->assertFileDoesNotExist(public_path());
         $this->assertFileDoesNotExist(resource_path());
         $this->assertFileDoesNotExist(base_path('routes/web.php'));
-        $this->assertFileDoesNotExist(base_path('postcss.config.js'));
-        $this->assertFileDoesNotExist(base_path('tailwind.config.js'));
+        $this->assertFileDoesNotExist(base_path('package.json'));
+        $this->assertFileDoesNotExist(base_path('vite.config.js'));
     }
 
     public function test_slim_api_failed()
@@ -69,7 +69,7 @@ class SlimTest extends TestCase
         $this->assertFileExists(base_path('routes/api.php'));
         $this->assertFileExists(base_path('routes/auth.php'));
         $this->assertFileDoesNotExist(base_path('routes/web.php'));
-        $this->assertFileDoesNotExist(base_path('postcss.config.js'));
-        $this->assertFileDoesNotExist(base_path('tailwind.config.js'));
+        $this->assertFileDoesNotExist(base_path('package.json'));
+        $this->assertFileDoesNotExist(base_path('vite.config.js'));
     }
 }

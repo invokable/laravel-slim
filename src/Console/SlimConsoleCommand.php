@@ -53,8 +53,6 @@ class SlimConsoleCommand extends Command
             base_path('package.json'),
             base_path('package-lock.json'),
             base_path('vite.config.js'),
-            base_path('postcss.config.js'),
-            base_path('tailwind.config.js'),
 
             // config
             config_path('auth.php'),

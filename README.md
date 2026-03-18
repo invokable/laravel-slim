@@ -8,10 +8,10 @@ Set up a Laravel project to console/api only.
 > **Note:** [laravel-console-starter](https://github.com/invokable/laravel-console-starter) is a starter kit that has this package applied.
 
 ## Requirements
-- PHP >= 8.2
-- Laravel >= 12.0
+- PHP >= 8.3
+- Laravel >= 13.0
 
-Only new projects with Laravel 12.(No starter kit, No API)
+Only new projects with Laravel 13.(No starter kit, No API)
 
 ## Installation
 
